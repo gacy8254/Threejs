@@ -126,10 +126,10 @@ const controls = new OrbitControls( camera, renderer.domElement );
 controls.target.set(0, 1.2, 0);
 controls.enableZoom = false;
 controls.enablePan = false;
-controls.minAzimuthAngle = -Math.PI / 3.;
-controls.maxAzimuthAngle = Math.PI / 3.;
-controls.minPolarAngle = 0.2;
-controls.maxPolarAngle = Math.PI / 1.5;
+controls.minAzimuthAngle = -Math.PI / 5.;
+controls.maxAzimuthAngle = Math.PI / 5.;
+controls.minPolarAngle = 0.7;
+controls.maxPolarAngle = Math.PI / 1.8;
 const 			clock = new THREE.Clock();
 
 const composer = new EffectComposer(renderer);
