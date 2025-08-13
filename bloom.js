@@ -23,10 +23,10 @@ function addBloomPass(scene, camera, gui, enableControl)
 		mipmapBlur: true,
 		luminanceThreshold: 0.4,
 		luminanceSmoothing: 0.094,
-		intensity: 1.03
+		intensity: 1.53
 	});
     effect.inverted = false; 
-    effect.mipmapBlurPass.radius = 0.75;
+    effect.mipmapBlurPass.radius = 0.85;
     const pass = new EffectPass(camera, effect);
 
 	const blendMode = effect.blendMode;
