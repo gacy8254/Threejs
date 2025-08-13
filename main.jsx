@@ -51,7 +51,7 @@ import toonVertShader from './shaders/my/toon.vert?raw'
 import toonFragShader from './shaders/my/toon.frag?raw'
 
 import { GUI } from 'dat.gui';
-import { addColorGradingPass } from './colorGrading.js';
+import { addColorGradingPass, last, next } from './colorGrading.js';
 
 import sceneModel from './static/japan.glb'
 import transModel from './static/transparent.glb'
@@ -147,6 +147,17 @@ loadCharacter(scene, mixer, camera);
 loadScene(sceneModel, scene, gui, bloomPass.effects[0], enableCon);
 loadScene(transModel, transScene, gui, bloomPass.effects[0], false);
 addParticle(scene);
+
+   window.addEventListener('keydown', (event) => {
+            if (event.code == 'KeyN')
+            {
+              last();
+            }
+            else if(event.code == 'KeyM')
+            {
+              next();
+            }
+        });
 
 // 5. 动画循环
 function animate() {
