@@ -1,0 +1,29 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dat.gui": "^0.7.9",
+    "postprocessing": "^6.37.7",
+    "stats.js": "^0.17.0",
+    "three": "^0.161.0",
+    "three-custom-shader-material": "^5.4.0",
+    "three-good-godrays": "^0.7.1",
+    "three-stdlib": "^2.33.0",
+    "yarn": "^1.22.22"
+  },
+  "devDependencies": {
+    "raw-loader": "^4.0.2",
+    "vite": "^7.1.1",
+    "vite-plugin-glsl": "^1.2.1"
+  }
+}
