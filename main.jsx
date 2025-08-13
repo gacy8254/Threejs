@@ -59,26 +59,9 @@ import transModel from './static/transparent.glb'
 
 let mixer = new THREE.AnimationMixer();;
 let colorGradingPass;
-// const tdlLoader = new LUTCubeLoader();
-// 			const lutMap = {
-// 				'1.cube': null,
-// 				'2.cube': null,
-// 				'3.cube': null,
-// 				'4.cube': null,
-// 				'5.cube': null,
-// 			};
-// 				Object.keys( lutMap ).forEach( name => {
 
-// 						new LUTCubeLoader()
-// 							.load( './static/luts/' + name, function ( result ) {
-
-// 								lutMap[ name ] = result;
-
-// 							} );
-//            } );
-
-const enableCon = false;
-const gui = true;
+const enableCon = true;
+const gui = new GUI;
 //gui.dom.style.zIndex = '1';
 
 // const stats = new Stats();
@@ -124,12 +107,12 @@ renderer.domElement.style.height = `${window.innerHeight}px`;
 
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.target.set(0, 1.2, 0);
-controls.enableZoom = false;
-controls.enablePan = false;
-controls.minAzimuthAngle = -Math.PI / 5.;
-controls.maxAzimuthAngle = Math.PI / 5.;
-controls.minPolarAngle = 0.7;
-controls.maxPolarAngle = Math.PI / 1.8;
+// controls.enableZoom = false;
+// controls.enablePan = false;
+// controls.minAzimuthAngle = -Math.PI / 5.;
+// controls.maxAzimuthAngle = Math.PI / 5.;
+// controls.minPolarAngle = 0.7;
+// controls.maxPolarAngle = Math.PI / 1.8;
 const 			clock = new THREE.Clock();
 
 const composer = new EffectComposer(renderer);

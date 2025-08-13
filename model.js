@@ -147,10 +147,10 @@ function loadCharacter(scene, mixer, camera)
                                 side: FrontSide,
                                 alphaTest: object.material.alphaTest,
                                 uniforms:{
-                                  uRampMap :{value:bodyRampMap},
+                                  uRampMap :{value:hairRampMap},
                                   uFaceLightMap :{value:faceLightMap},
                                   uMetalMap :{value:matcapMap},
-                                  uLightPosition :{value: lightPosition},
+                                  uLightPosition :{value: new THREE.Vector3(0.1,2,0.5)},
                                   uForwardVec : {value: new THREE.Vector3(0,0,1)},
                                   uRightVec : {value: new THREE.Vector3(1,0,0)},
                                   uResolution : {value: new THREE.Vector2(innerWidth * devicePixelRatio, innerHeight * devicePixelRatio,)},

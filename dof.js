@@ -18,10 +18,6 @@ KernelSize,
 
 function addDOFPass(scene, camera, gui, enableControl)
 {
-    const smaaEffect = new SMAAEffect();
-
-	smaaEffect.edgeDetectionMaterial.setEdgeDetectionThreshold(0.01);
-
 	const depthOfFieldEffect = new DepthOfFieldEffect(camera, {
 		focusDistance: 0.,
 		focalLength: 0.1027,
