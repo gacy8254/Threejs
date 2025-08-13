@@ -23,10 +23,10 @@ function addBloomPass(scene, camera, gui, enableControl)
 		mipmapBlur: true,
 		luminanceThreshold: 0.4,
 		luminanceSmoothing: 0.094,
-		intensity: 1.53
+		intensity: 0.6
 	});
     effect.inverted = false; 
-    effect.mipmapBlurPass.radius = 0.85;
+    effect.mipmapBlurPass.radius = 0.5;
     const pass = new EffectPass(camera, effect);
 
 	const blendMode = effect.blendMode;
@@ -50,7 +50,7 @@ function addBloomPass(scene, camera, gui, enableControl)
     {
         const bloomFolder = gui.addFolder('bloom _');
 
-        bloomFolder.add(params, "intensity", 0.0, 10.0, 0.01).onChange((value) => {
+        bloomFolder.add(params, "intensity", 0.0, 3.0, 0.001).onChange((value) => {
 
         	effect.intensity = Number(value);
 

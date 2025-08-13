@@ -221,16 +221,6 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
 				params.lut["base size"] = size;
 
 				if(capabilities.isWebGL2) {
-
-					if(context.getExtension("OES_texture_float_linear") === null) {
-
-						console.log("Linear float filtering not supported, " +
-							"converting to Uint8");
-
-						lut.convertToUint8();
-
-					}
-
 					lutEffect.setLUT(params.lut["3D texture"] ?
 						lut : lut.toDataTexture());
 
@@ -239,8 +229,6 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
 					lutEffect.setLUT(lut.convertToUint8().toDataTexture());
 
 				}
-
-				updateLUTPreview();
 
 			}).catch((error) => console.error(error));
 

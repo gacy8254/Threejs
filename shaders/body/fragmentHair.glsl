@@ -189,7 +189,7 @@ void main() {
     csm_Roughness = 0.4;
     csm_Metalness = 0.;
     vec3 aa = clamp(vec3(pow (blinPhong, 10.)), 0., 1.) / 1.5 * vec3(1., 0.7, 0.5);
-    csm_FragColor.rgb =pow(csm_FragColor.rgb + 0.8, vec3(50.)) * 100. * vec3(1., 0.7, 0.5);
+    csm_FragColor.rgb =pow(csm_FragColor.rgb + 0.85, vec3(100.)) * 1000. * vec3(1., 0.7, 0.5);
   }
   else if(uCloth)
   {
