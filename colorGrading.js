@@ -60,7 +60,7 @@ function load()
     const loadPromises = entriesToLoad.map(([key, path]) => {
         return new Promise((resolve, reject) => {
             let loader;
-            let fullPath = `./static/luts/${path}`;
+            let fullPath = `./static/images/lut/${path}`;
 
             if (path.endsWith('.3dl')) {
                 loader = lut3dlLoader;

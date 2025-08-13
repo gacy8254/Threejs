@@ -53,6 +53,7 @@ function addDOFPass(scene, camera, gui, enableControl)
 
             const cocMaterial = depthOfFieldEffect.circleOfConfusionMaterial;
             const blendMode = depthOfFieldEffect.blendMode;
+            	//blendMode.opacity.value = 0.;
 
             const RenderMode = {
             	DEFAULT: 0,

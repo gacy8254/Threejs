@@ -110,7 +110,6 @@ function addBloomPass(scene, camera, gui, enableControl)
         bloomFolder.add(params, "blend mode", BlendFunction).onChange((value) => {
 
         	blendMode.setBlendFunction(Number(value));
-
         });
 
         bloomFolder.add(pass, "dithering").onChange((value) => {
@@ -119,6 +118,7 @@ function addBloomPass(scene, camera, gui, enableControl)
 
         });
     }
+        	//blendMode.opacity.value = 0.;
 
     return pass;
 };

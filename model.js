@@ -18,6 +18,7 @@ import { RGBELoader } from './node_modules/three/examples/jsm/loaders/RGBELoader
 import CustomShaderMaterial from './node_modules/three-custom-shader-material/vanilla'
 
 import OtherfragmentShader from './shaders/body/fragment.glsl?raw'
+import HairfragmentShader from './shaders/body/fragmentHair.glsl?raw'
 import FacefragmentShader from './shaders/face/fragment.glsl?raw'
 import outlineFragmentShader from './shaders/outline/fragment.glsl?raw'
 import outlineVertexShader from './shaders/outline/vertex.glsl?raw'
@@ -140,7 +141,7 @@ function loadCharacter(scene, mixer, camera)
                     material = new  CustomShaderMaterial({  
                                 baseMaterial: THREE.MeshStandardMaterial,
                                 vertexShader,
-                                fragmentShader: OtherfragmentShader,
+                                fragmentShader: HairfragmentShader,
                                 depthWrite: object.material.depthWrite,
                                 depthTest: object.material.depthTest,
                                 transparent: object.material.transparent,
@@ -148,9 +149,9 @@ function loadCharacter(scene, mixer, camera)
                                 alphaTest: object.material.alphaTest,
                                 uniforms:{
                                   uRampMap :{value:hairRampMap},
-                                  uFaceLightMap :{value:faceLightMap},
+                                  uLightMap :{value:hairLightMap},
                                   uMetalMap :{value:matcapMap},
-                                  uLightPosition :{value: new THREE.Vector3(0.1,2,0.5)},
+                                  uLightPosition :{value: new THREE.Vector3(0.5,2,2.5)},
                                   uForwardVec : {value: new THREE.Vector3(0,0,1)},
                                   uRightVec : {value: new THREE.Vector3(1,0,0)},
                                   uResolution : {value: new THREE.Vector2(innerWidth * devicePixelRatio, innerHeight * devicePixelRatio,)},

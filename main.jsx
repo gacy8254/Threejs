@@ -142,7 +142,7 @@ bloomPass.needsSwap = true;
 transparentPass.renderToScreen = false;
 bloomPass.renderToScreen = false;
 
-//addColorGradingPass(scene, camera, renderer, composer, gui, true);
+//addColorGradingPass(scene, camera, renderer, composer, gui, enableCon);
 loadCharacter(scene, mixer, camera);
 loadScene(sceneModel, scene, gui, bloomPass.effects[0], enableCon);
 loadScene(transModel, transScene, gui, bloomPass.effects[0], false);
