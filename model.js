@@ -509,6 +509,10 @@ function loadScene(file, scene, gui, bloomEffect, enableCon)
           object.castShadow = false;
           object.receiveShadow = false;
         }
+        else if(object.material.name == 'MI_Box')
+        {
+          console.log(object.material.map);
+        }
         else 
         {
           if (materials.has(object.material.name))
