@@ -77,27 +77,27 @@ let colorGradingPass;
 // 							} );
 //            } );
 
-
-const gui = new GUI();
+const enableCon = false;
+const gui = true;
 //gui.dom.style.zIndex = '1';
 
-const stats = new Stats();
+// const stats = new Stats();
 
-// 配置面板（可选）：
-stats.showPanel(0); 
+// // 配置面板（可选）：
+// stats.showPanel(0); 
 
-stats.dom.style.position = 'fixed';
-stats.dom.style.left = '10px';   // 左侧偏移
-stats.dom.style.bottom = '10px'; // 底部偏移（原默认是 top:0）
-stats.dom.style.top = 'auto';    // 覆盖默认的 top:0
+// stats.dom.style.position = 'fixed';
+// stats.dom.style.left = '10px';   // 左侧偏移
+// stats.dom.style.bottom = '10px'; // 底部偏移（原默认是 top:0）
+// stats.dom.style.top = 'auto';    // 覆盖默认的 top:0
 
-document.body.appendChild(stats.dom);
+// document.body.appendChild(stats.dom);
 
 // 1. 创建场景
 const scene = new THREE.Scene();
 const transScene = new THREE.Scene();
 
-addLights(scene, gui, false);
+addLights(scene, gui, enableCon);
 
 // 2. 创建透视相机
 const camera = new THREE.PerspectiveCamera(
@@ -134,8 +134,8 @@ const 			clock = new THREE.Clock();
 
 const composer = new EffectComposer(renderer);
 const basePass = new RenderPass(scene, camera);
-const bloomPass = addBloomPass(scene, camera, gui, true);
-const dofPass = addDOFPass(scene, camera, gui, true);
+const bloomPass = addBloomPass(scene, camera, gui, enableCon);
+const dofPass = addDOFPass(scene, camera, gui, enableCon);
 const transparentPass = new CustomRenderPass(transScene, camera);
 const smaaEffect = new SMAAEffect();
 const smaaPass = new EffectPass(camera, smaaEffect);
@@ -161,7 +161,7 @@ bloomPass.renderToScreen = false;
 
 //addColorGradingPass(scene, camera, renderer, composer, gui, true);
 loadCharacter(scene, mixer, camera);
-loadScene(sceneModel, scene, gui, bloomPass.effects[0], true);
+loadScene(sceneModel, scene, gui, bloomPass.effects[0], enableCon);
 loadScene(transModel, transScene, gui, bloomPass.effects[0], false);
 addParticle(scene);
 
@@ -175,6 +175,6 @@ function animate() {
   controls.update();
   composer.render();
   //renderer.render(scene, camera);
-  stats.update(); 
+  //stats.update(); 
 }
 animate();

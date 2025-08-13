@@ -35,8 +35,8 @@ function addLights(scene, gui, enableHelper)
 
         const pointHelper = new THREE.PointLightHelper(pointLight);
         scene.add(pointHelper);
-    }
-	const params = {
+
+        	const params = {
 		"dir": {
 		    "dirPosx": dirLight.position.x,
 		    "dirPosy": dirLight.position.y,
@@ -80,6 +80,8 @@ function addLights(scene, gui, enableHelper)
     folder.add(params.point, "pointIntensity").onChange((value) => {
         pointLight.intensity = value;
     });
+    }
+
 
     return dirLight;
 }
