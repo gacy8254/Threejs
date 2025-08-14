@@ -173,6 +173,6 @@ function animate() {
   controls.update();
   composer.render();
   //renderer.render(scene, camera);
-  //stats.update(); 
+  stats.update(); 
 }
 animate();
