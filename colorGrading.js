@@ -550,18 +550,21 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
         const lut = LookupTexture3D.from(assets.get("ExposureM"));
         lutEffect = capabilities.isWebGL2 ? new LUT3DEffect(lut) :
             new LUT3DEffect(lut.convertToUint8().toDataTexture());
-        if (detectMobileOS())
-        {
+        let pass;
+        if (detectMobileOS()) {
+            pass = new EffectPass(camera,
+                brightnessContrastEffect,
+                hueSaturationEffect
+            );
         }
-            lutEffect.blendFunction = BlendFunction.SKIP;
-
+        else {
+            pass = new EffectPass(camera,
+                brightnessContrastEffect,
+                hueSaturationEffect,
+                lutEffect
+            );
+        }
         // lutEffect.inputColorSpace = LinearSRGBColorSpace; // Debug
-        const pass = new EffectPass(camera,
-            brightnessContrastEffect,
-            hueSaturationEffect,
-            lutEffect
-        );
-
         if (enableControl) {
             const params = {
                 brightnessContrast: {
