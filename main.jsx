@@ -87,7 +87,7 @@ const camera = new THREE.PerspectiveCamera(
   45, window.innerWidth / window.innerHeight, 0.1, 100
 );
 camera.position.z = 1.54662038;
-camera.position.y = 1.18431981494;
+camera.position.y = 1.38431981494;
 camera.position.x = -0.0930;
 
 // 3. 创建 WebGL 渲染器
@@ -106,7 +106,7 @@ renderer.domElement.style.width = `${window.innerWidth}px`; // CSS 尺寸保持�
 renderer.domElement.style.height = `${window.innerHeight}px`;
 
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.target.set(0, 1.2, 0);
+controls.target.set(0, 1.1, 0);
 controls.enableZoom = false;
 controls.enablePan = false;
 controls.minAzimuthAngle = -Math.PI / 5.;

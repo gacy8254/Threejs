@@ -77,7 +77,7 @@ function loadCharacter(scene, mixer, camera)
 {
     loader.load(characterModel, (gltf) => {
     const model = gltf.scene;
-    //model.scale.set(0.01, 0.01, 0.01);
+    model.scale.set(0.95, 0.95, 0.95);
     scene.add(model);
 
     const lightPosition = new THREE.Vector3(1., 1.,-1.0);
