@@ -81,8 +81,8 @@ function loadCharacter(scene, mixer, camera)
     scene.add(model);
 
     const lightPosition = new THREE.Vector3(1., 1.,-1.0);
-    const tintColor = new THREE.Vector3(1, 1.,0.7);
-    let globalInst = 0.9;
+    const tintColor = new THREE.Vector3(1, 1.,0.6);
+    let globalInst = 0.8;
     mixer._root = model;
     const animations = gltf.animations;
     const actions = {

@@ -47,12 +47,14 @@ function addDOFPass(scene, camera, gui, enableControl)
 		cocTextureEffect,
 		depthEffect
 	);
+	//depthOfFieldEffect.blendMode.opacity.value = 0.;
         if (enableControl)
         {
 		    const effectPass = pass;
 
             const cocMaterial = depthOfFieldEffect.circleOfConfusionMaterial;
             const blendMode = depthOfFieldEffect.blendMode;
+            	blendMode.opacity.value = 0.;
 
             const RenderMode = {
             	DEFAULT: 0,
