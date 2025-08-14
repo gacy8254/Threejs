@@ -1,29 +1,29 @@
 import {
-	BlendFunction,
-	BrightnessContrastEffect,
-	ColorAverageEffect,
-	LUT3DEffect,
-	EdgeDetectionMode,
-	EffectPass,
-	HueSaturationEffect,
-	LookupTexture3D,
-	LUT3dlLoader,
-	LUTCubeLoader,
-	RawImageData,
-	SepiaEffect,
-	SMAAEffect,
-	SMAAImageLoader,
-	SMAAPreset
+    BlendFunction,
+    BrightnessContrastEffect,
+    ColorAverageEffect,
+    LUT3DEffect,
+    EdgeDetectionMode,
+    EffectPass,
+    HueSaturationEffect,
+    LookupTexture3D,
+    LUT3dlLoader,
+    LUTCubeLoader,
+    RawImageData,
+    SepiaEffect,
+    SMAAEffect,
+    SMAAImageLoader,
+    SMAAPreset
 } from "postprocessing";
 
 import {
-	ClampToEdgeWrapping,
-	Color,
-	LinearFilter,
-	PerspectiveCamera,
-	TextureLoader
+    ClampToEdgeWrapping,
+    Color,
+    LinearFilter,
+    PerspectiveCamera,
+    TextureLoader
 } from "three";
-    let assets = new Map();
+let assets = new Map();
 
 import bleach_bypass from './static/images/lut/png/A/bleach-bypass.png';
 import candle_light from './static/images/lut/png/A/candle-light.png';
@@ -466,16 +466,15 @@ import ZXDiffusion from './static/images/lut/png/StylizedRetro/ZXDiffusion.PNG';
 // ]);
 
 let luts = new Map([
-  ['ExposureM', ExposureM],
-  ['VibranceA', VibranceA],
-  ['cool_contrast', cool_contrast]
+    ['ExposureM', ExposureM],
+    ['VibranceA', VibranceA],
+    ['cool_contrast', cool_contrast]
 ]);
 
-function load()
-{
+function load() {
     const textureLoader = new TextureLoader();
-	const lut3dlLoader = new LUT3dlLoader();
-	const lutCubeLoader = new LUTCubeLoader();
+    const lut3dlLoader = new LUT3dlLoader();
+    const lutCubeLoader = new LUTCubeLoader();
 
 
     // 只处理非 null 的条目
@@ -518,273 +517,265 @@ function load()
     return Promise.all(loadPromises);
 }
 let lutEffect;
-function addColorGradingPass(scene, camera, renderer, composer, gui, enableControl)
-{
+function addColorGradingPass(scene, camera, renderer, composer, gui, enableControl) {
     const texture = load().then(() => {
-	const capabilities = renderer.capabilities;
+        const capabilities = renderer.capabilities;
 
-	const brightnessContrastEffect = new BrightnessContrastEffect({
-		blendFunction: BlendFunction.SKIP
-	});
+        const brightnessContrastEffect = new BrightnessContrastEffect({
+            blendFunction: BlendFunction.SKIP
+        });
 
-	const hueSaturationEffect = new HueSaturationEffect({
-		blendFunction: BlendFunction.SET,
-		saturation: 0.11,
-		hue: 0.0
-	});
+        const hueSaturationEffect = new HueSaturationEffect({
+            blendFunction: BlendFunction.SET,
+            saturation: 0.11,
+            hue: 0.0
+        });
 
-	const lut = LookupTexture3D.from(assets.get("ExposureM"));
-	lutEffect = capabilities.isWebGL2 ? new LUT3DEffect(lut) :
-	new LUT3DEffect(lut.convertToUint8().toDataTexture());
+        const lut = LookupTexture3D.from(assets.get("ExposureM"));
+        lutEffect = capabilities.isWebGL2 ? new LUT3DEffect(lut) :
+            new LUT3DEffect(lut.convertToUint8().toDataTexture());
 
-	// lutEffect.inputColorSpace = LinearSRGBColorSpace; // Debug
-	const pass = new EffectPass(camera,
-		brightnessContrastEffect,
-		hueSaturationEffect,
-		lutEffect
-	);
+        // lutEffect.inputColorSpace = LinearSRGBColorSpace; // Debug
+        const pass = new EffectPass(camera,
+            brightnessContrastEffect,
+            hueSaturationEffect,
+            lutEffect
+        );
 
-        if (enableControl)
-        {
-		const params = {
-			brightnessContrast: {
-				"brightness": brightnessContrastEffect.uniforms.get("brightness").value,
-				"contrast": brightnessContrastEffect.uniforms.get("contrast").value,
-				"opacity": brightnessContrastEffect.blendMode.opacity.value,
-				"blend mode": brightnessContrastEffect.blendMode.blendFunction
-			},
-			hueSaturation: {
-				"hue": 0.0,
-				"saturation": hueSaturationEffect.uniforms.get("saturation").value,
-				"opacity": hueSaturationEffect.blendMode.opacity.value,
-				"blend mode": hueSaturationEffect.blendMode.blendFunction
-			},
-			lut: {
-				"LUT": lutEffect.getLUT().name,
-				"base size": lutEffect.getLUT().image.width,
-				"3D texture": true,
-				"tetrahedral filter": false,
-				"scale up": false,
-				"target size": 48,
-				"show LUT": false,
-				"opacity": lutEffect.blendMode.opacity.value,
-				"blend mode": lutEffect.blendMode.blendFunction
-			}
-		};
+        if (enableControl) {
+            const params = {
+                brightnessContrast: {
+                    "brightness": brightnessContrastEffect.uniforms.get("brightness").value,
+                    "contrast": brightnessContrastEffect.uniforms.get("contrast").value,
+                    "opacity": brightnessContrastEffect.blendMode.opacity.value,
+                    "blend mode": brightnessContrastEffect.blendMode.blendFunction
+                },
+                hueSaturation: {
+                    "hue": 0.0,
+                    "saturation": hueSaturationEffect.uniforms.get("saturation").value,
+                    "opacity": hueSaturationEffect.blendMode.opacity.value,
+                    "blend mode": hueSaturationEffect.blendMode.blendFunction
+                },
+                lut: {
+                    "LUT": lutEffect.getLUT().name,
+                    "base size": lutEffect.getLUT().image.width,
+                    "3D texture": true,
+                    "tetrahedral filter": false,
+                    "scale up": false,
+                    "target size": 48,
+                    "show LUT": false,
+                    "opacity": lutEffect.blendMode.opacity.value,
+                    "blend mode": lutEffect.blendMode.blendFunction
+                }
+            };
 
-		let objectURL = null;
+            let objectURL = null;
 
-		function changeLUT() {
+            function changeLUT() {
 
-			const original = assets.get(params.lut.LUT);
-			const size = Math.min(original.image.width, original.image.height);
-			const targetSize = params.lut["target size"];
-			const scaleUp = params.lut["scale up"] && (targetSize > size);
+                const original = assets.get(params.lut.LUT);
+                const size = Math.min(original.image.width, original.image.height);
+                const targetSize = params.lut["target size"];
+                const scaleUp = params.lut["scale up"] && (targetSize > size);
 
-			let promise;
+                let promise;
 
-			if(scaleUp) {
+                if (scaleUp) {
 
-				const lut = original.isLookupTexture3D ? original :
-					LookupTexture3D.from(original);
+                    const lut = original.isLookupTexture3D ? original :
+                        LookupTexture3D.from(original);
 
-				console.time("Tetrahedral Upscaling");
-				promise = lut.scaleUp(targetSize, false);
-				document.body.classList.add("progress");
+                    console.time("Tetrahedral Upscaling");
+                    promise = lut.scaleUp(targetSize, false);
+                    document.body.classList.add("progress");
 
-			} else {
+                } else {
 
-				promise = Promise.resolve(LookupTexture3D.from(original));
+                    promise = Promise.resolve(LookupTexture3D.from(original));
 
-			}
+                }
 
-			promise.then((lut) => {
+                promise.then((lut) => {
 
-				if(scaleUp) {
+                    if (scaleUp) {
 
-					console.timeEnd("Tetrahedral Upscaling");
-					document.body.classList.remove("progress");
+                        console.timeEnd("Tetrahedral Upscaling");
+                        document.body.classList.remove("progress");
 
-				}
+                    }
 
-				lutEffect.getLUT().dispose();
-				params.lut["base size"] = size;
+                    lutEffect.getLUT().dispose();
+                    params.lut["base size"] = size;
 
-				if(capabilities.isWebGL2) {
-					lutEffect.setLUT(params.lut["3D texture"] ?
-						lut : lut.toDataTexture());
+                    if (capabilities.isWebGL2) {
+                        lutEffect.setLUT(params.lut["3D texture"] ?
+                            lut : lut.toDataTexture());
 
-				} else {
+                    } else {
 
-					lutEffect.setLUT(lut.convertToUint8().toDataTexture());
+                        lutEffect.setLUT(lut.convertToUint8().toDataTexture());
 
-				}
+                    }
 
-			}).catch((error) => console.error(error));
+                }).catch((error) => console.error(error));
 
-		}
+            }
 
-		const infoOptions = [];
-		let ff = gui.addFolder('color grading');
+            const infoOptions = [];
+            let ff = gui.addFolder('color grading');
 
-		let f = ff.addFolder("Brightness & Contrast");
+            let f = ff.addFolder("Brightness & Contrast");
 
-		f.add(params.brightnessContrast, "brightness", -1.0, 1.0, 0.001)
-			.onChange((value) => {
+            f.add(params.brightnessContrast, "brightness", -1.0, 1.0, 0.001)
+                .onChange((value) => {
 
-				brightnessContrastEffect.uniforms.get("brightness").value = value;
+                    brightnessContrastEffect.uniforms.get("brightness").value = value;
 
-			});
+                });
 
-		f.add(params.brightnessContrast, "contrast", -1.0, 1.0, 0.001)
-			.onChange((value) => {
+            f.add(params.brightnessContrast, "contrast", -1.0, 1.0, 0.001)
+                .onChange((value) => {
 
-				brightnessContrastEffect.uniforms.get("contrast").value = value;
+                    brightnessContrastEffect.uniforms.get("contrast").value = value;
 
-			});
+                });
 
-		f.add(params.brightnessContrast, "opacity", 0.0, 1.0, 0.01)
-			.onChange((value) => {
+            f.add(params.brightnessContrast, "opacity", 0.0, 1.0, 0.01)
+                .onChange((value) => {
 
-				brightnessContrastEffect.blendMode.opacity.value = value;
+                    brightnessContrastEffect.blendMode.opacity.value = value;
 
-			});
+                });
 
-		f.add(params.brightnessContrast, "blend mode", BlendFunction)
-			.onChange((value) => {
+            f.add(params.brightnessContrast, "blend mode", BlendFunction)
+                .onChange((value) => {
 
-				brightnessContrastEffect.blendMode.setBlendFunction(Number(value));
+                    brightnessContrastEffect.blendMode.setBlendFunction(Number(value));
 
-			});
+                });
 
-		f = ff.addFolder("Hue & Saturation");
+            f = ff.addFolder("Hue & Saturation");
 
-		f.add(params.hueSaturation, "hue", 0.0, Math.PI * 2.0, 0.001)
-			.onChange((value) => {
+            f.add(params.hueSaturation, "hue", 0.0, Math.PI * 2.0, 0.001)
+                .onChange((value) => {
 
-				hueSaturationEffect.setHue(value);
+                    hueSaturationEffect.setHue(value);
 
-			});
+                });
 
-		f.add(params.hueSaturation, "saturation", -1.0, 1.0, 0.001)
-			.onChange((value) => {
+            f.add(params.hueSaturation, "saturation", -1.0, 1.0, 0.001)
+                .onChange((value) => {
 
-				hueSaturationEffect.uniforms.get("saturation").value = value;
+                    hueSaturationEffect.uniforms.get("saturation").value = value;
 
-			});
+                });
 
-		f.add(params.hueSaturation, "opacity", 0.0, 1.0, 0.01)
-			.onChange((value) => {
+            f.add(params.hueSaturation, "opacity", 0.0, 1.0, 0.01)
+                .onChange((value) => {
 
-				hueSaturationEffect.blendMode.opacity.value = value;
+                    hueSaturationEffect.blendMode.opacity.value = value;
 
-			});
+                });
 
-		f.add(params.hueSaturation, "blend mode", BlendFunction)
-			.onChange((value) => {
+            f.add(params.hueSaturation, "blend mode", BlendFunction)
+                .onChange((value) => {
 
-				hueSaturationEffect.blendMode.setBlendFunction(Number(value));
+                    hueSaturationEffect.blendMode.setBlendFunction(Number(value));
 
-			});
+                });
 
-		f = ff.addFolder("Lookup Texture 3D");
+            f = ff.addFolder("Lookup Texture 3D");
 
-		f.add(params.lut, "LUT", [...luts.keys()]).onChange(changeLUT);
+            f.add(params.lut, "LUT", [...luts.keys()]).onChange(changeLUT);
 
-		infoOptions.push(f.add(params.lut, "base size").listen());
+            infoOptions.push(f.add(params.lut, "base size").listen());
 
-		if(capabilities.isWebGL2) {
+            if (capabilities.isWebGL2) {
 
-			f.add(params.lut, "3D texture").onChange(changeLUT);
-			f.add(params.lut, "tetrahedral filter").onChange((value) => {
+                f.add(params.lut, "3D texture").onChange(changeLUT);
+                f.add(params.lut, "tetrahedral filter").onChange((value) => {
 
-				lutEffect.setTetrahedralInterpolationEnabled(value);
+                    lutEffect.setTetrahedralInterpolationEnabled(value);
 
-			});
+                });
 
-		}
+            }
 
-		f.add(params.lut, "scale up").onChange(changeLUT);
-		f.add(params.lut, "target size", [32, 48, 64, 96, 128]).onChange(changeLUT);
+            f.add(params.lut, "scale up").onChange(changeLUT);
+            f.add(params.lut, "target size", [32, 48, 64, 96, 128]).onChange(changeLUT);
 
-		f.add(params.lut, "opacity", 0.0, 1.0, 0.01).onChange((value) => {
+            f.add(params.lut, "opacity", 0.0, 1.0, 0.01).onChange((value) => {
 
-			lutEffect.blendMode.opacity.value = value;
+                lutEffect.blendMode.opacity.value = value;
 
-		});
+            });
 
-		f.add(params.lut, "blend mode", BlendFunction).onChange((value) => {
+            f.add(params.lut, "blend mode", BlendFunction).onChange((value) => {
 
-			lutEffect.blendMode.setBlendFunction(Number(value));
+                lutEffect.blendMode.setBlendFunction(Number(value));
 
-		});
+            });
 
-		f.open();
+            f.open();
 
-		for(const option of infoOptions) {
+            for (const option of infoOptions) {
 
-			option.domElement.style.pointerEvents = "none";
+                option.domElement.style.pointerEvents = "none";
 
-		}
+            }
 
         }
 
-    composer.addPass(pass);
+        composer.addPass(pass);
 
-	});
+    });
 
 };
 
 let cur = 0;
-function next()
-{
-	cur += 1;
-	if (cur >= luts.size)
-	{
-		cur = 0;
-	}
-let index = 0;
-for (const [key, value] of luts) {
-    if (index === cur) { // 找第 2 个元素
- 		lutEffect.setLUT(assets.get(key));
-		console.log(key);
-        break;
+function next() {
+    cur += 1;
+    if (cur >= luts.size) {
+        cur = 0;
     }
-    index++;
-}
+    let index = 0;
+    for (const [key, value] of luts) {
+        if (index === cur) { // 找第 2 个元素
+            lutEffect.setLUT(assets.get(key));
+            console.log(key);
+            break;
+        }
+        index++;
+    }
 }
 
-function last()
-{
-	cur -= 1;
-	if (cur < 0)
-	{
-		cur = luts.size - 1;
-	}
-let index = 0;
-for (const [key, value] of luts) {
-    if (index === cur) { // 找第 2 个元素
- 		lutEffect.setLUT(assets.get(key));
-		console.log(key);
-        break;
+function last() {
+    cur -= 1;
+    if (cur < 0) {
+        cur = luts.size - 1;
     }
-    index++;
-}
+    let index = 0;
+    for (const [key, value] of luts) {
+        if (index === cur) { // 找第 2 个元素
+            lutEffect.setLUT(assets.get(key));
+            console.log(key);
+            break;
+        }
+        index++;
+    }
 }
 
 let show = true;
-function toggle()
-{
-    if (show)
-    {
+function toggle() {
+    if (show) {
         lutEffect.blendMode.blendFunction = BlendFunction.SET;
         show = false;
     }
-    else{
+    else {
         lutEffect.blendMode.blendFunction = BlendFunction.SKIP;
         show = true;
 
     }
 }
 
-export{addColorGradingPass, next, last, toggle};
+export { addColorGradingPass, next, last, toggle };

@@ -15,21 +15,21 @@ import {
   AnimationMixer,
 } from 'three'
 import {
-  EffectComposer, 
+  EffectComposer,
   RenderPass,
   SMAAEffect,
   EffectPass,
-	SMAAPreset,
+  SMAAPreset,
 } from "postprocessing";
 
 import Stats from 'stats.js';
 
-import {addBloomPass} from './bloom.js';
-import {addDOFPass} from './dof.js';
-import {addParticle,updateParticle } from './particle.js';
-import {addLights } from './light.js';
-import {loadCharacter, loadScene, updateMaterial } from './model.js';
-import {CustomRenderPass} from './customRenderpass.js';
+import { addBloomPass } from './bloom.js';
+import { addDOFPass } from './dof.js';
+import { addParticle, updateParticle } from './particle.js';
+import { addLights } from './light.js';
+import { loadCharacter, loadScene, updateMaterial } from './model.js';
+import { CustomRenderPass } from './customRenderpass.js';
 
 import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
@@ -60,21 +60,20 @@ import transModel from './static/transparent.glb'
 let mixer = new THREE.AnimationMixer();;
 let colorGradingPass;
 
-const enableCon = true;
-const gui = new GUI;
+const enableCon = false;
+const gui = true;
+//const gui = new GUI;
 //gui.dom.style.zIndex = '1';
+// const stats = new Stats();
+// // 配置面板（可选）：
+// stats.showPanel(0); 
 
-const stats = new Stats();
+// stats.dom.style.position = 'fixed';
+// stats.dom.style.left = '10px';   // 左侧偏移
+// stats.dom.style.bottom = '10px'; // 底部偏移（原默认是 top:0）
+// stats.dom.style.top = 'auto';    // 覆盖默认的 top:0
 
-// 配置面板（可选）：
-stats.showPanel(0); 
-
-stats.dom.style.position = 'fixed';
-stats.dom.style.left = '10px';   // 左侧偏移
-stats.dom.style.bottom = '10px'; // 底部偏移（原默认是 top:0）
-stats.dom.style.top = 'auto';    // 覆盖默认的 top:0
-
-document.body.appendChild(stats.dom);
+// document.body.appendChild(stats.dom);
 
 // 1. 创建场景
 const scene = new THREE.Scene();
@@ -91,11 +90,11 @@ camera.position.y = 1.38431981494;
 camera.position.x = -0.0930;
 
 // 3. 创建 WebGL 渲染器
-const renderer  = new THREE.WebGLRenderer({
-	powerPreference: "high-performance",
-	antialias: false,
-	stencil: false,
-	depth: false
+const renderer = new THREE.WebGLRenderer({
+  powerPreference: "high-performance",
+  antialias: false,
+  stencil: false,
+  depth: false
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
@@ -105,7 +104,7 @@ document.body.appendChild(renderer.domElement);
 renderer.domElement.style.width = `${window.innerWidth}px`; // CSS 尺寸保持屏幕物理尺寸
 renderer.domElement.style.height = `${window.innerHeight}px`;
 
-const controls = new OrbitControls( camera, renderer.domElement );
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 1.1, 0);
 controls.enableZoom = false;
 controls.enablePan = false;
@@ -113,7 +112,7 @@ controls.minAzimuthAngle = -Math.PI / 5.;
 controls.maxAzimuthAngle = Math.PI / 5.;
 controls.minPolarAngle = 0.7;
 controls.maxPolarAngle = Math.PI / 1.8;
-const 			clock = new THREE.Clock();
+const clock = new THREE.Clock();
 
 const composer = new EffectComposer(renderer);
 const basePass = new RenderPass(scene, camera);
@@ -142,26 +141,23 @@ bloomPass.needsSwap = true;
 transparentPass.renderToScreen = false;
 bloomPass.renderToScreen = false;
 
-//addColorGradingPass(scene, camera, renderer, composer, gui, enableCon);
+addColorGradingPass(scene, camera, renderer, composer, gui, enableCon);
 loadCharacter(scene, mixer, camera);
 loadScene(sceneModel, scene, gui, bloomPass.effects[0], enableCon);
 loadScene(transModel, transScene, gui, bloomPass.effects[0], false);
 addParticle(scene);
 
-   window.addEventListener('keydown', (event) => {
-            if (event.code == 'KeyN')
-            {
-              last();
-            }
-            else if(event.code == 'KeyM')
-            {
-              next();
-            }
-            else if(event.code == 'KeyB')
-            {
-              toggle();
-            }
-        });
+window.addEventListener('keydown', (event) => {
+  if (event.code == 'KeyN') {
+    last();
+  }
+  else if (event.code == 'KeyM') {
+    next();
+  }
+  else if (event.code == 'KeyB') {
+    toggle();
+  }
+});
 
 // 5. 动画循环
 function animate() {
@@ -173,6 +169,8 @@ function animate() {
   controls.update();
   composer.render();
   //renderer.render(scene, camera);
-  stats.update(); 
+  if (enableCon) {
+    stats.update();
+  }
 }
 animate();
