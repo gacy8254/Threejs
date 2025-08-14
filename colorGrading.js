@@ -491,15 +491,13 @@ function load()
                 (texture) => {
                     texture.name = key;
 
-                    if (!path.endsWith('.3dl') && !path.endsWith('.cube')) {
-                        // 针对普通纹理设置参数
-                        texture.generateMipmaps = false;
-                        texture.minFilter = LinearFilter;
-                        texture.magFilter = LinearFilter;
-                        texture.wrapS = ClampToEdgeWrapping;
-                        texture.wrapT = ClampToEdgeWrapping;
-                        texture.flipY = false;
-                    }
+                    // 针对普通纹理设置参数
+                    texture.generateMipmaps = false;
+                    texture.minFilter = LinearFilter;
+                    texture.magFilter = LinearFilter;
+                    texture.wrapS = ClampToEdgeWrapping;
+                    texture.wrapT = ClampToEdgeWrapping;
+                    texture.flipY = false;
 
                     assets.set(key, texture);
                     resolve(texture);
