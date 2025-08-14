@@ -169,37 +169,12 @@ void main() {
 
   vec3 albedo = diffuse + finalSpec + metallic + glow + rimLight;
 
-  if(baseColor.a < .5) {
-    discard;
-  }
-
   csm_Roughness = 1.;
   csm_Metalness = 0.;
 
-  if (uHair)
-  {
-    csm_Emissive = pow(albedo + 0.75, vec3(20));
-    //csm_Emissive = vec3(albedo);
-    csm_DiffuseColor *= vec4(0.3);
-    csm_Roughness = 0.4;
-    csm_Metalness = 0.;
-  }
-  else if(uCloth)
-  {
-    csm_Emissive = vec3(albedo) + (vec3(ft * 3.) * vec3(1., 0.6, 0.5));
-    csm_DiffuseColor = vec4(0.);
-  }
-  else if(uHand)
-  {
-    csm_DiffuseColor *= vec4(0.);
-    csm_Emissive = vec3(albedo) * vec3(1., 0.8, 0.7) ;
-  }
-  else
-  {
-  csm_DiffuseColor *= vec4(0.1);
-  csm_Emissive = vec3(albedo * 1.4) + (vec3(ft * 1.) * vec3(1., 0.6, 0.5));
-  csm_Emissive *= uBodyTintColor;
-  }
+csm_DiffuseColor *= vec4(0.);
+csm_Emissive = vec3(albedo) * vec3(1., 0.8, 0.7) ;
+  
 
   csm_Emissive *= vec3(uGlobalIntensity);
   csm_Emissive *= vec3(uTintColor);

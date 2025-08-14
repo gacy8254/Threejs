@@ -18,7 +18,9 @@ import { RGBELoader } from './node_modules/three/examples/jsm/loaders/RGBELoader
 import CustomShaderMaterial from './node_modules/three-custom-shader-material/vanilla'
 
 import OtherfragmentShader from './shaders/body/fragment.glsl?raw'
+import BodyfragmentShader from './shaders/body/fragmentBody.glsl?raw'
 import HairfragmentShader from './shaders/body/fragmentHair.glsl?raw'
+import ClothfragmentShader from './shaders/body/fragmentCloth.glsl?raw'
 import FacefragmentShader from './shaders/face/fragment.glsl?raw'
 import outlineFragmentShader from './shaders/outline/fragment.glsl?raw'
 import outlineVertexShader from './shaders/outline/vertex.glsl?raw'
@@ -180,7 +182,7 @@ function loadCharacter(scene, mixer, camera)
                     material = new  CustomShaderMaterial({  
                                 baseMaterial: THREE.MeshStandardMaterial,
                                 vertexShader,
-                                fragmentShader: OtherfragmentShader,
+                                fragmentShader: ClothfragmentShader,
                                 depthWrite: object.material.depthWrite,
                                 depthTest: object.material.depthTest,
                                 transparent: object.material.transparent,
@@ -219,7 +221,7 @@ function loadCharacter(scene, mixer, camera)
                     material = new  CustomShaderMaterial({  
                                 baseMaterial: THREE.MeshStandardMaterial,
                                 vertexShader,
-                                fragmentShader: OtherfragmentShader,
+                                fragmentShader: BodyfragmentShader,
                                 depthWrite: object.material.depthWrite,
                                 depthTest: object.material.depthTest,
                                 transparent: object.material.transparent,
@@ -241,7 +243,7 @@ function loadCharacter(scene, mixer, camera)
                                   uHair : {value : false},
                                   uCloth : {value : false},
                                   uShadowColor : {value : new THREE.Color('white')},
-                                  uBodyTintColor : {value : new THREE.Color('#fcecd4')},
+                                  uBodyTintColor : {value : new THREE.Color('#ffe9d2')},
                                   uMetallic : {value : 0.5},
                                   uRimLightWidth : {value : 1},
                                   uRimLightIntensity : {value : 1},
@@ -352,9 +354,12 @@ function loadCharacter(scene, mixer, camera)
     positionX : 2.35,
     positionY : -0.3,
     positionZ : 1.3,
+    color : '#ffe9d2',
 };
 function loadScene(file, scene, gui, bloomEffect, enableCon)
 {
+
+
     loader.load(file, (gltf) => {
     let sceneModle = gltf.scene;
     scene.add(sceneModle);
@@ -369,6 +374,7 @@ function loadScene(file, scene, gui, bloomEffect, enableCon)
 
     if(enableCon)
     {
+      gui.addColor(sceneControls, 'color');
       const sceneFolder = gui.addFolder("scene");
       sceneFolder.add(sceneControls, 'scale').name('scale').min(-10).max(10).step(0.1).onChange(onChanged);
       sceneFolder.add(sceneControls, 'rotateY').name('rotateY').onChange(onChanged);
@@ -548,6 +554,10 @@ function updateMaterial(time, depthTex)
   for (let i = 0; i < godrayMats.length; i++)
   {
     godrayMats[i].uniforms.uTime = {value :time};
+  }
+  if (bodyMat)
+  {
+    bodyMat.uniforms.uBodyTintColor = {value : new THREE.Color(sceneControls.color)};
   }
 }
 export{loadCharacter, loadScene, updateMaterial};
