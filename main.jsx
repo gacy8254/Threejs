@@ -64,17 +64,17 @@ const enableCon = true;
 const gui = new GUI;
 //gui.dom.style.zIndex = '1';
 
-// const stats = new Stats();
+const stats = new Stats();
 
-// // 配置面板（可选）：
-// stats.showPanel(0); 
+// 配置面板（可选）：
+stats.showPanel(0); 
 
-// stats.dom.style.position = 'fixed';
-// stats.dom.style.left = '10px';   // 左侧偏移
-// stats.dom.style.bottom = '10px'; // 底部偏移（原默认是 top:0）
-// stats.dom.style.top = 'auto';    // 覆盖默认的 top:0
+stats.dom.style.position = 'fixed';
+stats.dom.style.left = '10px';   // 左侧偏移
+stats.dom.style.bottom = '10px'; // 底部偏移（原默认是 top:0）
+stats.dom.style.top = 'auto';    // 覆盖默认的 top:0
 
-// document.body.appendChild(stats.dom);
+document.body.appendChild(stats.dom);
 
 // 1. 创建场景
 const scene = new THREE.Scene();
@@ -107,12 +107,12 @@ renderer.domElement.style.height = `${window.innerHeight}px`;
 
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.target.set(0, 1.2, 0);
-// controls.enableZoom = false;
-// controls.enablePan = false;
-// controls.minAzimuthAngle = -Math.PI / 5.;
-// controls.maxAzimuthAngle = Math.PI / 5.;
-// controls.minPolarAngle = 0.7;
-// controls.maxPolarAngle = Math.PI / 1.8;
+controls.enableZoom = false;
+controls.enablePan = false;
+controls.minAzimuthAngle = -Math.PI / 5.;
+controls.maxAzimuthAngle = Math.PI / 5.;
+controls.minPolarAngle = 0.7;
+controls.maxPolarAngle = Math.PI / 1.8;
 const 			clock = new THREE.Clock();
 
 const composer = new EffectComposer(renderer);
