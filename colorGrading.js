@@ -516,6 +516,24 @@ function load() {
     // 等待所有加载完成
     return Promise.all(loadPromises);
 }
+function detectMobileOS() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // 检测是否为 iOS 设备（iPhone, iPad, iPod）
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+    // 检测是否为 Android 设备
+    const isAndroid = /android/i.test(userAgent);
+
+    if (isIOS) {
+        return "ios";
+    } else if (isAndroid) {
+        return "android";
+    } else {
+        return "other";
+    }
+}
+
 let lutEffect;
 function addColorGradingPass(scene, camera, renderer, composer, gui, enableControl) {
     const texture = load().then(() => {
@@ -534,7 +552,10 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
         const lut = LookupTexture3D.from(assets.get("ExposureM"));
         lutEffect = capabilities.isWebGL2 ? new LUT3DEffect(lut) :
             new LUT3DEffect(lut.convertToUint8().toDataTexture());
-
+        if (detectMobileOS() === 'ios')
+        {
+            lutEffect.blendFunction = BlendFunction.SKIP;
+        }
         // lutEffect.inputColorSpace = LinearSRGBColorSpace; // Debug
         const pass = new EffectPass(camera,
             brightnessContrastEffect,
