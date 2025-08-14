@@ -552,13 +552,14 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
             new LUT3DEffect(lut.convertToUint8().toDataTexture());
         if (detectMobileOS())
         {
-            lutEffect.blendFunction = BlendFunction.SKIP;
         }
+            lutEffect.blendFunction = BlendFunction.SKIP;
+
         // lutEffect.inputColorSpace = LinearSRGBColorSpace; // Debug
         const pass = new EffectPass(camera,
             brightnessContrastEffect,
             hueSaturationEffect,
-            lutEffect
+            //lutEffect
         );
 
         if (enableControl) {
