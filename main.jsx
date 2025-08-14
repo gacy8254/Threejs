@@ -57,7 +57,7 @@ import sceneModel from './static/japan.glb'
 import transModel from './static/transparent.glb'
 
 
-let mixer = new THREE.AnimationMixer();;
+let mixer = new THREE.AnimationMixer();
 let colorGradingPass;
 
 const enableCon = false;
