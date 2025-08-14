@@ -526,11 +526,9 @@ function detectMobileOS() {
     const isAndroid = /android/i.test(userAgent);
 
     if (isIOS) {
-        return "ios";
+        return true;
     } else if (isAndroid) {
-        return "android";
-    } else {
-        return "other";
+        return false;
     }
 }
 
@@ -552,7 +550,7 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
         const lut = LookupTexture3D.from(assets.get("ExposureM"));
         lutEffect = capabilities.isWebGL2 ? new LUT3DEffect(lut) :
             new LUT3DEffect(lut.convertToUint8().toDataTexture());
-        if (detectMobileOS() === 'ios')
+        if (detectMobileOS())
         {
             lutEffect.blendFunction = BlendFunction.SKIP;
         }
