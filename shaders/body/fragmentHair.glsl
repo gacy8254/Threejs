@@ -128,13 +128,13 @@ void main() {
 
   float blinPhong = step(0., NDotL) * pow(max(NDotH, 0.), 16.);
   /* 避免漏光 */
-  vec3 noMetalicSpec = vec3(step(1.04 - blinPhong, lightMapTex.b) * lightMapTex.r) * uNoMetallic;
+  vec3 noMetalicSpec = vec3(step(1.04 - blinPhong, 1.) * 1.) * uNoMetallic;
 
   /*根据光的方向有一个衰减 这里设置的下限是0.2 ，光滑的非金属表面是不吸收颜色的，但是金属会吸收 所以需要乘以baseColor */
-  vec3 metalicSpec = vec3(blinPhong * lightMapTex.b * (lamberStep * .8 + .2) * baseColor.rgb) * uMetallic;
+  vec3 metalicSpec = vec3(blinPhong * 1. * (lamberStep * .8 + .2) * baseColor.rgb) * uMetallic;
 
   /* 根据魔法图r通道提取金属区域 */
-  float isMetal = step(.95, lightMapTex.r);
+  float isMetal = step(.95, 1.);
 
   vec3 finalSpec = mix(noMetalicSpec, metalicSpec, isMetal);
 
@@ -166,7 +166,7 @@ void main() {
 
   vec3 glow = mix(vec3(0.), emissiveTex.rgb * abs(sin(uTime * .8)) * .2, emissiveTex.a);
 
-  vec3 albedo = diffuse + finalSpec + metallic + glow + rimLight;
+  vec3 albedo = diffuse + (finalSpec * 2.) + metallic + glow + rimLight;
 
   if(baseColor.a < .5) {
     discard;
@@ -180,33 +180,17 @@ void main() {
   /*根据光的方向有一个衰减 这里设置的下限是0.2 ，光滑的非金属表面是不吸收颜色的，但是金属会吸收 所以需要乘以baseColor */
   vec3 metalicSpec1 = vec3(blinPhong * 1. * (lamberStep * .8 + .2) * baseColor.rgb) * uMetallic;
 
-
-  if (uHair)
-  {
     //csm_Emissive = pow(albedo + 0.75, vec3(300.)) * 20.5;
     //csm_Emissive = vec3(albedo);
     //csm_DiffuseColor *= vec4(0.3);
-    csm_Roughness = 0.4;
-    csm_Metalness = 0.;
-    vec3 aa = clamp(vec3(pow (blinPhong, 10.)), 0., 1.) / 1.5 * vec3(1., 0.7, 0.5);
-    csm_FragColor.rgb =pow(csm_FragColor.rgb + 0.85, vec3(100.)) * 1000. * vec3(1., 0.7, 0.5);
-  }
-  else if(uCloth)
-  {
-    csm_Emissive = vec3(albedo) + (vec3(ft * 3.) * vec3(1., 0.6, 0.5));
-    csm_DiffuseColor = vec4(0.);
-  }
-  else if(uHand)
-  {
-    csm_DiffuseColor *= vec4(0.);
-    csm_Emissive = vec3(albedo) * vec3(1., 0.8, 0.7) ;
-  }
-  else
-  {
-  csm_DiffuseColor *= vec4(0.1);
-  csm_Emissive = vec3(albedo * 1.4) * vec3(1., 0.6, 0.4) + (vec3(ft * 1.) * vec3(1., 0.6, 0.5));
-  }
+    //csm_Roughness = 0.4;
+    //csm_Metalness = 0.;
+    //vec3 aa = clamp(vec3(pow (blinPhong, 10.)), 0., 1.) / 1.5 * vec3(1., 0.7, 0.5);
+    //csm_FragColor.rgb =pow(csm_FragColor.rgb + 0.85, vec3(100.)) * 1000. * vec3(1., 0.7, 0.5);
+    //csm_FragColor
 
-  csm_Emissive *= vec3(uGlobalIntensity);
-  csm_Emissive *= vec3(uTintColor);
+  csm_FragColor.rgb = (vec3(pow(albedo + 0.72, vec3(25.))) * 2.5  + vec3(0.005))* vec3(1., 0.85, 0.65);
+
+  //csm_Emissive *= vec3(uGlobalIntensity);
+  //csm_Emissive *= vec3(uTintColor);
 }

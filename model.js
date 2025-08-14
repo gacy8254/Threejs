@@ -69,6 +69,7 @@ fogTex.colorSpace = LinearSRGBColorSpace
 const loader = new GLTFLoader();
 let godrayMats = new Array();
 const materials = new Map();
+let bodyMat;
 
 function loadCharacter(scene, mixer, camera)
 {
@@ -240,6 +241,7 @@ function loadCharacter(scene, mixer, camera)
                                   uHair : {value : false},
                                   uCloth : {value : false},
                                   uShadowColor : {value : new THREE.Color('white')},
+                                  uBodyTintColor : {value : new THREE.Color('#fcecd4')},
                                   uMetallic : {value : 0.5},
                                   uRimLightWidth : {value : 1},
                                   uRimLightIntensity : {value : 1},
@@ -250,6 +252,7 @@ function loadCharacter(scene, mixer, camera)
                                 },
                                 map: colorTex,
                                 });
+                                bodyMat = material;
         }
         else if ( object.material.name == 'M_Hand')
         {
@@ -340,9 +343,6 @@ function loadCharacter(scene, mixer, camera)
             console.error('模型加载错误:', error);
 });
 }
-
-function loadScene(file, scene, gui, bloomEffect, enableCon)
-{
     const sceneControls = {
     // 初始颜色：从材质中获取十六进制值（如 0x00ff00）
     scale : 0.025,
@@ -353,7 +353,8 @@ function loadScene(file, scene, gui, bloomEffect, enableCon)
     positionY : -0.3,
     positionZ : 1.3,
 };
-
+function loadScene(file, scene, gui, bloomEffect, enableCon)
+{
     loader.load(file, (gltf) => {
     let sceneModle = gltf.scene;
     scene.add(sceneModle);

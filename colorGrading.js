@@ -244,225 +244,231 @@ import TinyPalette from './static/images/lut/png/StylizedRetro/TinyPalette.PNG';
 import ZX from './static/images/lut/png/StylizedRetro/ZX.PNG';
 import ZXDiffusion from './static/images/lut/png/StylizedRetro/ZXDiffusion.PNG';
 
+// let luts = new Map([
+//   ['bleach_bypass', bleach_bypass],
+//   ['candle_light', candle_light],
+//   ['cool_contrast', cool_contrast],
+//   ['desaturated_fog', desaturated_fog],
+//   ['evening', evening],
+//   ['fall', fall],
+//   ['filmic1', filmic1],
+//   ['filmic2', filmic2],
+//   ['matrix_green', matrix_green],
+//   ['strong_amber', strong_amber],
+//   ['warm_contrast', warm_contrast],
+//   ['BleachAlternative', BleachAlternative],
+//   ['BleachH', BleachH],
+//   ['BleachL', BleachL],
+//   ['BleachM', BleachM],
+//   ['BlueContrast', BlueContrast],
+//   ['BlueTint', BlueTint],
+//   ['ColdH', ColdH],
+//   ['ColdL', ColdL],
+//   ['ColdM', ColdM],
+//   ['ContrastA', ContrastA],
+//   ['ContrastB', ContrastB],
+//   ['ContrastC', ContrastC],
+//   ['ContrastD', ContrastD],
+//   ['Desaturate', Desaturate],
+//   ['ExposureH', ExposureH],
+//   ['ExposureL', ExposureL],
+//   ['ExposureM', ExposureM],
+//   ['GreenTint', GreenTint],
+//   ['Invert', Invert],
+//   ['LowContrastShadows', LowContrastShadows],
+//   ['Normal', Normal],
+//   ['RedTint', RedTint],
+//   ['SharpWasteland', SharpWasteland],
+//   ['StrongBlueTint', StrongBlueTint],
+//   ['VibranceA', VibranceA],
+//   ['VibranceB', VibranceB],
+//   ['VibranceC', VibranceC],
+//   ['VibranceD', VibranceD],
+//   ['VibranceE', VibranceE],
+//   ['WarmH', WarmH],
+//   ['WarmL', WarmL],
+//   ['WarmM', WarmM],
+//   ['Deuteranopia', Deuteranopia],
+//   ['Doge', Doge],
+//   ['GrayLRed', GrayLRed],
+//   ['GrayMGreen', GrayMGreen],
+//   ['GraySBlue', GraySBlue],
+//   ['Protanopia', Protanopia],
+//   ['Tritanopia', Tritanopia],
+//   ['ActiveGreen', ActiveGreen],
+//   ['ActivePurple', ActivePurple],
+//   ['BlueHue', BlueHue],
+//   ['Desperado', Desperado],
+//   ['DustyOrange', DustyOrange],
+//   ['EndGame', EndGame],
+//   ['Jurassic', Jurassic],
+//   ['OldFilm', OldFilm],
+//   ['OldFilm2', OldFilm2],
+//   ['OldFilm3', OldFilm3],
+//   ['OldFilm4', OldFilm4],
+//   ['OldFilm5', OldFilm5],
+//   ['RaptorHunt', RaptorHunt],
+//   ['RedDawn', RedDawn],
+//   ['RobotAction', RobotAction],
+//   ['RobotReaction', RobotReaction],
+//   ['SettingSun1', SettingSun1],
+//   ['SoftOlderFootage', SoftOlderFootage],
+//   ['SoftOldFootage', SoftOldFootage],
+//   ['SoftOrange', SoftOrange],
+//   ['SummerAction', SummerAction],
+//   ['TheEnd', TheEnd],
+//   ['ToxicGreen', ToxicGreen],
+//   ['B_WHighContrast', B_WHighContrast],
+//   ['B_WHighContrastDigital', B_WHighContrastDigital],
+//   ['B_WHighContrastOld', B_WHighContrastOld],
+//   ['B_WLowContrastOld', B_WLowContrastOld],
+//   ['B_WSimple', B_WSimple],
+//   ['Sepia1', Sepia1],
+//   ['Sepia2', Sepia2],
+//   ['Sepia3', Sepia3],
+//   ['T80sPost_ApocalypticAction', T80sPost_ApocalypticAction],
+//   ['T80sPost_ApocalypticDrama', T80sPost_ApocalypticDrama],
+//   ['BlindHero', BlindHero],
+//   ['Blockbuster1', Blockbuster1],
+//   ['Blockbuster10', Blockbuster10],
+//   ['Blockbuster11', Blockbuster11],
+//   ['Blockbuster12', Blockbuster12],
+//   ['Blockbuster13', Blockbuster13],
+//   ['Blockbuster14', Blockbuster14],
+//   ['Blockbuster15', Blockbuster15],
+//   ['Blockbuster16', Blockbuster16],
+//   ['Blockbuster2', Blockbuster2],
+//   ['Blockbuster3', Blockbuster3],
+//   ['Blockbuster4', Blockbuster4],
+//   ['Blockbuster5', Blockbuster5],
+//   ['Blockbuster6', Blockbuster6],
+//   ['Blockbuster7', Blockbuster7],
+//   ['Blockbuster8', Blockbuster8],
+//   ['Blockbuster9', Blockbuster9],
+//   ['Chocolatier', Chocolatier],
+//   ['DodgeThis', DodgeThis],
+//   ['FinalFight', FinalFight],
+//   ['FlowerPower', FlowerPower],
+//   ['Furiosa', Furiosa],
+//   ['Kuato', Kuato],
+//   ['Max1', Max1],
+//   ['Max2', Max2],
+//   ['ModernDystopianAction', ModernDystopianAction],
+//   ['Quaid', Quaid],
+//   ['RobotSalvation', RobotSalvation],
+//   ['Rohan', Rohan],
+//   ['SimpleFilm', SimpleFilm],
+//   ['Tina', Tina],
+//   ['Tower', Tower],
+//   ['WorldWar1', WorldWar1],
+//   ['F2AA3', F2AA3],
+//   ['F2AA5', F2AA5],
+//   ['F2BB3', F2BB3],
+//   ['F2BB5', F2BB5],
+//   ['F35A', F35A],
+//   ['F35B', F35B],
+//   ['F3AA0', F3AA0],
+//   ['K1A', K1A],
+//   ['K1B', K1B],
+//   ['K23A', K23A],
+//   ['K23B', K23B],
+//   ['K5AA5', K5AA5],
+//   ['K5AA8', K5AA8],
+//   ['K5BB8', K5BB8],
+//   ['Stock1', Stock1],
+//   ['Stock10', Stock10],
+//   ['Stock11', Stock11],
+//   ['Stock12', Stock12],
+//   ['Stock13', Stock13],
+//   ['Stock14', Stock14],
+//   ['Stock2', Stock2],
+//   ['Stock3', Stock3],
+//   ['Stock4', Stock4],
+//   ['Stock5', Stock5],
+//   ['Stock6', Stock6],
+//   ['Stock7', Stock7],
+//   ['Stock8', Stock8],
+//   ['Stock9', Stock9],
+//   ['Vintage1', Vintage1],
+//   ['Vintage10', Vintage10],
+//   ['Vintage11', Vintage11],
+//   ['Vintage12', Vintage12],
+//   ['Vintage2', Vintage2],
+//   ['Vintage3', Vintage3],
+//   ['Vintage4', Vintage4],
+//   ['Vintage5', Vintage5],
+//   ['Vintage6', Vintage6],
+//   ['Vintage7', Vintage7],
+//   ['Vintage8', Vintage8],
+//   ['Vintage9', Vintage9],
+//   ['T90sActionNY', T90sActionNY],
+//   ['T90sBleach', T90sBleach],
+//   ['T90sBleachStrongContrast', T90sBleachStrongContrast],
+//   ['T90sGreen', T90sGreen],
+//   ['Aliens1', Aliens1],
+//   ['Aliens2', Aliens2],
+//   ['Aliens3', Aliens3],
+//   ['Aliens4', Aliens4],
+//   ['ColdIsolation', ColdIsolation],
+//   ['ColorShift', ColorShift],
+//   ['CorruptedGreen', CorruptedGreen],
+//   ['CorruptedNight', CorruptedNight],
+//   ['CorruptedPurple', CorruptedPurple],
+//   ['CyanHaze', CyanHaze],
+//   ['DarkEdge', DarkEdge],
+//   ['DarkRedHaze', DarkRedHaze],
+//   ['DayNight', DayNight],
+//   ['Desert1', Desert1],
+//   ['Desert2', Desert2],
+//   ['Desert3', Desert3],
+//   ['Desert4', Desert4],
+//   ['Dopefish', Dopefish],
+//   ['GreenIsolation', GreenIsolation],
+//   ['GreenIsolation2', GreenIsolation2],
+//   ['LowGreen', LowGreen],
+//   ['Nightfall', Nightfall],
+//   ['PurpleRain', PurpleRain],
+//   ['SettingSun', SettingSun],
+//   ['SrongMoonLight', SrongMoonLight],
+//   ['StrongGreen', StrongGreen],
+//   ['Underwater', Underwater],
+//   ['WarmIsolation', WarmIsolation],
+//   ['Winter', Winter],
+//   ['Atri', Atri],
+//   ['B_WComicBook', B_WComicBook],
+//   ['B_WComicBookExtreme', B_WComicBookExtreme],
+//   ['DiffusionNoise', DiffusionNoise],
+//   ['Friend', Friend],
+//   ['FriendDiffusion', FriendDiffusion],
+//   ['Gamebob1', Gamebob1],
+//   ['Gamebob2', Gamebob2],
+//   ['GamebobAC', GamebobAC],
+//   ['GamebobACDiffusion', GamebobACDiffusion],
+//   ['GamebobColor', GamebobColor],
+//   ['GamebobColorDiffusion', GamebobColorDiffusion],
+//   ['Nest', Nest],
+//   ['NestDiffusion', NestDiffusion],
+//   ['P4', P4],
+//   ['P4Diffusion', P4Diffusion],
+//   ['Posterize1', Posterize1],
+//   ['Posterize2', Posterize2],
+//   ['Posterize3', Posterize3],
+//   ['Sanic1', Sanic1],
+//   ['Sanic1Diffusion', Sanic1Diffusion],
+//   ['Sanic2', Sanic2],
+//   ['Sanic2Diffusion', Sanic2Diffusion],
+//   ['Shareware', Shareware],
+//   ['SpectrumLove1', SpectrumLove1],
+//   ['SpectrumLove2', SpectrumLove2],
+//   ['TinyPalette', TinyPalette],
+//   ['ZX', ZX],
+//   ['ZXDiffusion', ZXDiffusion]
+// ]);
+
 let luts = new Map([
-  ['bleach_bypass', bleach_bypass],
-  ['candle_light', candle_light],
-  ['cool_contrast', cool_contrast],
-  ['desaturated_fog', desaturated_fog],
-  ['evening', evening],
-  ['fall', fall],
-  ['filmic1', filmic1],
-  ['filmic2', filmic2],
-  ['matrix_green', matrix_green],
-  ['strong_amber', strong_amber],
-  ['warm_contrast', warm_contrast],
-  ['BleachAlternative', BleachAlternative],
-  ['BleachH', BleachH],
-  ['BleachL', BleachL],
-  ['BleachM', BleachM],
-  ['BlueContrast', BlueContrast],
-  ['BlueTint', BlueTint],
-  ['ColdH', ColdH],
-  ['ColdL', ColdL],
-  ['ColdM', ColdM],
-  ['ContrastA', ContrastA],
-  ['ContrastB', ContrastB],
-  ['ContrastC', ContrastC],
-  ['ContrastD', ContrastD],
-  ['Desaturate', Desaturate],
-  ['ExposureH', ExposureH],
-  ['ExposureL', ExposureL],
   ['ExposureM', ExposureM],
-  ['GreenTint', GreenTint],
-  ['Invert', Invert],
-  ['LowContrastShadows', LowContrastShadows],
-  ['Normal', Normal],
-  ['RedTint', RedTint],
-  ['SharpWasteland', SharpWasteland],
-  ['StrongBlueTint', StrongBlueTint],
   ['VibranceA', VibranceA],
-  ['VibranceB', VibranceB],
-  ['VibranceC', VibranceC],
-  ['VibranceD', VibranceD],
-  ['VibranceE', VibranceE],
-  ['WarmH', WarmH],
-  ['WarmL', WarmL],
-  ['WarmM', WarmM],
-  ['Deuteranopia', Deuteranopia],
-  ['Doge', Doge],
-  ['GrayLRed', GrayLRed],
-  ['GrayMGreen', GrayMGreen],
-  ['GraySBlue', GraySBlue],
-  ['Protanopia', Protanopia],
-  ['Tritanopia', Tritanopia],
-  ['ActiveGreen', ActiveGreen],
-  ['ActivePurple', ActivePurple],
-  ['BlueHue', BlueHue],
-  ['Desperado', Desperado],
-  ['DustyOrange', DustyOrange],
-  ['EndGame', EndGame],
-  ['Jurassic', Jurassic],
-  ['OldFilm', OldFilm],
-  ['OldFilm2', OldFilm2],
-  ['OldFilm3', OldFilm3],
-  ['OldFilm4', OldFilm4],
-  ['OldFilm5', OldFilm5],
-  ['RaptorHunt', RaptorHunt],
-  ['RedDawn', RedDawn],
-  ['RobotAction', RobotAction],
-  ['RobotReaction', RobotReaction],
-  ['SettingSun1', SettingSun1],
-  ['SoftOlderFootage', SoftOlderFootage],
-  ['SoftOldFootage', SoftOldFootage],
-  ['SoftOrange', SoftOrange],
-  ['SummerAction', SummerAction],
-  ['TheEnd', TheEnd],
-  ['ToxicGreen', ToxicGreen],
-  ['B_WHighContrast', B_WHighContrast],
-  ['B_WHighContrastDigital', B_WHighContrastDigital],
-  ['B_WHighContrastOld', B_WHighContrastOld],
-  ['B_WLowContrastOld', B_WLowContrastOld],
-  ['B_WSimple', B_WSimple],
-  ['Sepia1', Sepia1],
-  ['Sepia2', Sepia2],
-  ['Sepia3', Sepia3],
-  ['T80sPost_ApocalypticAction', T80sPost_ApocalypticAction],
-  ['T80sPost_ApocalypticDrama', T80sPost_ApocalypticDrama],
-  ['BlindHero', BlindHero],
-  ['Blockbuster1', Blockbuster1],
-  ['Blockbuster10', Blockbuster10],
-  ['Blockbuster11', Blockbuster11],
-  ['Blockbuster12', Blockbuster12],
-  ['Blockbuster13', Blockbuster13],
-  ['Blockbuster14', Blockbuster14],
-  ['Blockbuster15', Blockbuster15],
-  ['Blockbuster16', Blockbuster16],
-  ['Blockbuster2', Blockbuster2],
-  ['Blockbuster3', Blockbuster3],
-  ['Blockbuster4', Blockbuster4],
-  ['Blockbuster5', Blockbuster5],
-  ['Blockbuster6', Blockbuster6],
-  ['Blockbuster7', Blockbuster7],
-  ['Blockbuster8', Blockbuster8],
-  ['Blockbuster9', Blockbuster9],
-  ['Chocolatier', Chocolatier],
-  ['DodgeThis', DodgeThis],
-  ['FinalFight', FinalFight],
-  ['FlowerPower', FlowerPower],
-  ['Furiosa', Furiosa],
-  ['Kuato', Kuato],
-  ['Max1', Max1],
-  ['Max2', Max2],
-  ['ModernDystopianAction', ModernDystopianAction],
-  ['Quaid', Quaid],
-  ['RobotSalvation', RobotSalvation],
-  ['Rohan', Rohan],
-  ['SimpleFilm', SimpleFilm],
-  ['Tina', Tina],
-  ['Tower', Tower],
-  ['WorldWar1', WorldWar1],
-  ['F2AA3', F2AA3],
-  ['F2AA5', F2AA5],
-  ['F2BB3', F2BB3],
-  ['F2BB5', F2BB5],
-  ['F35A', F35A],
-  ['F35B', F35B],
-  ['F3AA0', F3AA0],
-  ['K1A', K1A],
-  ['K1B', K1B],
-  ['K23A', K23A],
-  ['K23B', K23B],
-  ['K5AA5', K5AA5],
-  ['K5AA8', K5AA8],
-  ['K5BB8', K5BB8],
-  ['Stock1', Stock1],
-  ['Stock10', Stock10],
-  ['Stock11', Stock11],
-  ['Stock12', Stock12],
-  ['Stock13', Stock13],
-  ['Stock14', Stock14],
-  ['Stock2', Stock2],
-  ['Stock3', Stock3],
-  ['Stock4', Stock4],
-  ['Stock5', Stock5],
-  ['Stock6', Stock6],
-  ['Stock7', Stock7],
-  ['Stock8', Stock8],
-  ['Stock9', Stock9],
-  ['Vintage1', Vintage1],
-  ['Vintage10', Vintage10],
-  ['Vintage11', Vintage11],
-  ['Vintage12', Vintage12],
-  ['Vintage2', Vintage2],
-  ['Vintage3', Vintage3],
-  ['Vintage4', Vintage4],
-  ['Vintage5', Vintage5],
-  ['Vintage6', Vintage6],
-  ['Vintage7', Vintage7],
-  ['Vintage8', Vintage8],
-  ['Vintage9', Vintage9],
-  ['T90sActionNY', T90sActionNY],
-  ['T90sBleach', T90sBleach],
-  ['T90sBleachStrongContrast', T90sBleachStrongContrast],
-  ['T90sGreen', T90sGreen],
-  ['Aliens1', Aliens1],
-  ['Aliens2', Aliens2],
-  ['Aliens3', Aliens3],
-  ['Aliens4', Aliens4],
-  ['ColdIsolation', ColdIsolation],
-  ['ColorShift', ColorShift],
-  ['CorruptedGreen', CorruptedGreen],
-  ['CorruptedNight', CorruptedNight],
-  ['CorruptedPurple', CorruptedPurple],
-  ['CyanHaze', CyanHaze],
-  ['DarkEdge', DarkEdge],
-  ['DarkRedHaze', DarkRedHaze],
-  ['DayNight', DayNight],
-  ['Desert1', Desert1],
-  ['Desert2', Desert2],
-  ['Desert3', Desert3],
-  ['Desert4', Desert4],
-  ['Dopefish', Dopefish],
-  ['GreenIsolation', GreenIsolation],
-  ['GreenIsolation2', GreenIsolation2],
-  ['LowGreen', LowGreen],
-  ['Nightfall', Nightfall],
-  ['PurpleRain', PurpleRain],
-  ['SettingSun', SettingSun],
-  ['SrongMoonLight', SrongMoonLight],
-  ['StrongGreen', StrongGreen],
-  ['Underwater', Underwater],
-  ['WarmIsolation', WarmIsolation],
-  ['Winter', Winter],
-  ['Atri', Atri],
-  ['B_WComicBook', B_WComicBook],
-  ['B_WComicBookExtreme', B_WComicBookExtreme],
-  ['DiffusionNoise', DiffusionNoise],
-  ['Friend', Friend],
-  ['FriendDiffusion', FriendDiffusion],
-  ['Gamebob1', Gamebob1],
-  ['Gamebob2', Gamebob2],
-  ['GamebobAC', GamebobAC],
-  ['GamebobACDiffusion', GamebobACDiffusion],
-  ['GamebobColor', GamebobColor],
-  ['GamebobColorDiffusion', GamebobColorDiffusion],
-  ['Nest', Nest],
-  ['NestDiffusion', NestDiffusion],
-  ['P4', P4],
-  ['P4Diffusion', P4Diffusion],
-  ['Posterize1', Posterize1],
-  ['Posterize2', Posterize2],
-  ['Posterize3', Posterize3],
-  ['Sanic1', Sanic1],
-  ['Sanic1Diffusion', Sanic1Diffusion],
-  ['Sanic2', Sanic2],
-  ['Sanic2Diffusion', Sanic2Diffusion],
-  ['Shareware', Shareware],
-  ['SpectrumLove1', SpectrumLove1],
-  ['SpectrumLove2', SpectrumLove2],
-  ['TinyPalette', TinyPalette],
-  ['ZX', ZX],
-  ['ZXDiffusion', ZXDiffusion]
+  ['cool_contrast', cool_contrast]
 ]);
 
 function load()
@@ -518,27 +524,23 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
 {
     const texture = load().then(() => {
 	const capabilities = renderer.capabilities;
-	const colorAverageEffect = new ColorAverageEffect(BlendFunction.SKIP);
-	const sepiaEffect = new SepiaEffect({ blendFunction: BlendFunction.SKIP });
 
 	const brightnessContrastEffect = new BrightnessContrastEffect({
 		blendFunction: BlendFunction.SKIP
 	});
 
 	const hueSaturationEffect = new HueSaturationEffect({
-		blendFunction: BlendFunction.SKIP,
-		saturation: 0.4,
+		blendFunction: BlendFunction.SET,
+		saturation: 0.11,
 		hue: 0.0
 	});
 
-	const lut = LookupTexture3D.from(assets.get("bleach_bypass"));
+	const lut = LookupTexture3D.from(assets.get("ExposureM"));
 	lutEffect = capabilities.isWebGL2 ? new LUT3DEffect(lut) :
 	new LUT3DEffect(lut.convertToUint8().toDataTexture());
 
 	// lutEffect.inputColorSpace = LinearSRGBColorSpace; // Debug
 	const pass = new EffectPass(camera,
-		colorAverageEffect,
-		sepiaEffect,
 		brightnessContrastEffect,
 		hueSaturationEffect,
 		lutEffect
@@ -547,14 +549,6 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
         if (enableControl)
         {
 		const params = {
-			colorAverage: {
-				"opacity": colorAverageEffect.blendMode.opacity.value,
-				"blend mode": colorAverageEffect.blendMode.blendFunction
-			},
-			sepia: {
-				"opacity": sepiaEffect.blendMode.opacity.value,
-				"blend mode": sepiaEffect.blendMode.blendFunction
-			},
 			brightnessContrast: {
 				"brightness": brightnessContrastEffect.uniforms.get("brightness").value,
 				"contrast": brightnessContrastEffect.uniforms.get("contrast").value,
@@ -635,36 +629,7 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
 		const infoOptions = [];
 		let ff = gui.addFolder('color grading');
 
-		let f = ff.addFolder("Color Average");
-
-		f.add(params.colorAverage, "opacity", 0.0, 1.0, 0.01).onChange((value) => {
-
-			colorAverageEffect.blendMode.opacity.value = value;
-
-		});
-
-		f.add(params.colorAverage, "blend mode", BlendFunction)
-			.onChange((value) => {
-
-				colorAverageEffect.blendMode.setBlendFunction(Number(value));
-
-			});
-
-		f = ff.addFolder("Sepia");
-
-		f.add(params.sepia, "opacity", 0.0, 1.0, 0.01).onChange((value) => {
-
-			sepiaEffect.blendMode.opacity.value = value;
-
-		});
-
-		f.add(params.sepia, "blend mode", BlendFunction).onChange((value) => {
-
-			sepiaEffect.blendMode.setBlendFunction(Number(value));
-
-		});
-
-		f = ff.addFolder("Brightness & Contrast");
+		let f = ff.addFolder("Brightness & Contrast");
 
 		f.add(params.brightnessContrast, "brightness", -1.0, 1.0, 0.001)
 			.onChange((value) => {
@@ -771,55 +736,6 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
 	});
 
 };
-function changeLUT(name) {
-
-			const original = assets.get(name);
-			const size = Math.min(original.image.width, original.image.height);
-			const targetSize = params.lut["target size"];
-			const scaleUp = params.lut["scale up"] && (targetSize > size);
-
-			let promise;
-
-			if(scaleUp) {
-
-				const lut = original.isLookupTexture3D ? original :
-					LookupTexture3D.from(original);
-
-				console.time("Tetrahedral Upscaling");
-				promise = lut.scaleUp(targetSize, false);
-				document.body.classList.add("progress");
-
-			} else {
-
-				promise = Promise.resolve(LookupTexture3D.from(original));
-
-			}
-
-			promise.then((lut) => {
-
-				if(scaleUp) {
-
-					console.timeEnd("Tetrahedral Upscaling");
-					document.body.classList.remove("progress");
-
-				}
-
-				lutEffect.getLUT().dispose();
-				params.lut["base size"] = size;
-
-				if(capabilities.isWebGL2) {
-					lutEffect.setLUT(params.lut["3D texture"] ?
-						lut : lut.toDataTexture());
-
-				} else {
-
-					lutEffect.setLUT(lut.convertToUint8().toDataTexture());
-
-				}
-
-			}).catch((error) => console.error(error));
-
-		}
 
 let cur = 0;
 function next()
@@ -858,4 +774,19 @@ for (const [key, value] of luts) {
 }
 }
 
-export{addColorGradingPass, next, last};
+let show = true;
+function toggle()
+{
+    if (show)
+    {
+        lutEffect.blendMode.blendFunction = BlendFunction.SET;
+        show = false;
+    }
+    else{
+        lutEffect.blendMode.blendFunction = BlendFunction.SKIP;
+        show = true;
+
+    }
+}
+
+export{addColorGradingPass, next, last, toggle};

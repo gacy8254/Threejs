@@ -6,7 +6,7 @@ function addLights(scene, gui, enableHelper)
     scene.add(dirLight);
     dirLight.castShadow = true;
     dirLight.position.set(16, 4.9, -8.9);
-    dirLight.intensity = 30;
+    dirLight.intensity = 40;
     dirLight.target.position.set(0., 1, 1.5);
     dirLight.shadow.mapSize.set(1024, 1024);
 
@@ -18,13 +18,13 @@ function addLights(scene, gui, enableHelper)
     shadowCamera.near = 0.0001;
     shadowCamera.far = 20;
 
-    const ambinetLight = new THREE.AmbientLight(0xffffff, 1.5);
+    const ambinetLight = new THREE.AmbientLight(0xffcfaf, 0.75);
     scene.add(ambinetLight);
 
     const pointLight = new THREE.PointLight(0xffffff, 9.2, 0); // 颜色, 强度, 距离
     scene.add(pointLight);
     pointLight.position.set(1.2, 2., -0.6);
-    pointLight.intensity = 3;
+    pointLight.intensity = 1;
 
     if (enableHelper)
     {
@@ -49,9 +49,13 @@ function addLights(scene, gui, enableHelper)
 			"pointPosz": pointLight.position.z,
 			"pointIntensity": pointLight.intensity
 		},
+        "AmbientLightIntensity" : ambinetLight.intensity
 	};
 
     const lightFolder = gui.addFolder('lights');
+    lightFolder.add(params, "AmbientLightIntensity", 0., 3., 0.01).onChange((value) => {
+        ambinetLight.intensity = value;
+    });
 
     let folder = lightFolder.addFolder("dir light");
     folder.add(params.dir, "dirPosx").onChange((value) => {

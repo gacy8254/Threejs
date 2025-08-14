@@ -51,7 +51,7 @@ import toonVertShader from './shaders/my/toon.vert?raw'
 import toonFragShader from './shaders/my/toon.frag?raw'
 
 import { GUI } from 'dat.gui';
-import { addColorGradingPass, last, next } from './colorGrading.js';
+import { addColorGradingPass, last, next, toggle } from './colorGrading.js';
 
 import sceneModel from './static/japan.glb'
 import transModel from './static/transparent.glb'
@@ -156,6 +156,10 @@ addParticle(scene);
             else if(event.code == 'KeyM')
             {
               next();
+            }
+            else if(event.code == 'KeyB')
+            {
+              toggle();
             }
         });
 

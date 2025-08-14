@@ -14,6 +14,7 @@ uniform sampler2D uEmissiveMap;
 uniform sampler2D uDepthTexture;
 uniform float uIsDay;
 uniform vec3 uShadowColor;
+uniform vec3 uBodyTintColor;
 uniform vec3 uTintColor;
 uniform float uNoMetallic;
 uniform float uMetallic;
@@ -196,7 +197,8 @@ void main() {
   else
   {
   csm_DiffuseColor *= vec4(0.1);
-  csm_Emissive = vec3(albedo * 1.4) * vec3(1., 0.6, 0.4) + (vec3(ft * 1.) * vec3(1., 0.6, 0.5));
+  csm_Emissive = vec3(albedo * 1.4) + (vec3(ft * 1.) * vec3(1., 0.6, 0.5));
+  csm_Emissive *= uBodyTintColor;
   }
 
   csm_Emissive *= vec3(uGlobalIntensity);
