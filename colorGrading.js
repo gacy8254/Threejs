@@ -559,7 +559,7 @@ function addColorGradingPass(scene, camera, renderer, composer, gui, enableContr
         const pass = new EffectPass(camera,
             brightnessContrastEffect,
             hueSaturationEffect,
-            //lutEffect
+            lutEffect
         );
 
         if (enableControl) {
