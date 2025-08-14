@@ -145,7 +145,7 @@ void main() {
 
   float fresnelClamp = .5;
 
-  float ft = pow(fresnel, 8.);
+  float ft = pow(fresnel, 16.);
 
   fresnel = pow(fresnel, 8.);
 
