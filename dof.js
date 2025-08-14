@@ -47,7 +47,7 @@ function addDOFPass(scene, camera, gui, enableControl)
 		cocTextureEffect,
 		depthEffect
 	);
-	//depthOfFieldEffect.blendMode.opacity.value = 0.;
+	depthOfFieldEffect.blendMode.opacity.value = 0.;
         if (enableControl)
         {
 		    const effectPass = pass;

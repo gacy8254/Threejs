@@ -175,7 +175,7 @@ void main() {
 
   csm_Roughness = 1.;
   csm_Metalness = 0.;
-  csm_Emissive = vec3(albedo) + (vec3(ft * 2.) * vec3(1., 0.6, 0.5));
+  csm_Emissive = vec3(albedo) + (vec3(ft * 2.) * vec3(1., 0.9, 0.5));
   csm_DiffuseColor = vec4(0.);
   csm_FragColor.rgb = vec3(csm_Emissive);
 
