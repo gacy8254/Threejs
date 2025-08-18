@@ -143,6 +143,6 @@ void main()
 
     //float a = f5 * fXd;
 
-    csm_FragColor = vec4(vec3(emissiveColor.rgb * vec3(1.f, 0.7, 0.5)),emissiveColor.r * f5 * 0.8);
+    csm_FragColor = vec4(vec3(emissiveColor.rgb * vec3(1.f, 0.7, 0.5) * vec3(0.6)),emissiveColor.r * f5 * 0.8);
     //csm_FragColor = vec4(vec3(1.), 1.);
 }

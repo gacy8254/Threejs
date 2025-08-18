@@ -1,4 +1,3 @@
-varying vec2 vUv;
 varying vec3 vWorldNormal;
 varying vec3 vWorldTangent;
 varying vec3 vWorldBitangent;
@@ -40,6 +39,23 @@ float readDepth(sampler2D depthSampler, vec2 coord) {
   return viewZToOrthographicDepth(viewZ, uNear, uFar);
 }
 
+float StrandSpecular(vec3 V, vec3 T, vec3 L, vec3 N, float exponent,float scale){
+  //V：点到相机方向
+  //T：副切削方向
+  //L：点到光源方向，如果是直射光就是光的照射方向的反方向
+  //N：法线方向
+  float nl = saturate(dot(N, L));
+  vec3 H = normalize(L + V);
+  T = normalize((scale * 2. - 1.) * N + T);
+  float dotTH = dot(T, H);
+  float sinTH = sqrt(1.0 - dotTH * dotTH);
+  float dirAtten = smoothstep(-1.0, 0.0, dotTH);
+  float factor = dirAtten * pow(sinTH, exponent);
+  factor *= nl;
+  float bdv = dot(V, N);
+  return factor * bdv;
+}
+
 void main() {
   /* 处理需要的数据 */
 
@@ -47,8 +63,6 @@ void main() {
   vec4 normalTex = texture2D(uNormalMap, vUv);
   vec3 normalTs = vec3(normalTex.rg * 2. - 1., 0.);
   normalTs.z = sqrt(1. - dot(normalTs.xy, normalTs.xy));
-
-  mat3 tbn = mat3(normalize(vWorldTangent), normalize(vWorldBitangent), normalize(vWorldNormal));
 
   vec3 worldNormal = normalize(vWorldNormal);
   vec3 viewNormal = (vViewMatrix * vec4(worldNormal, 0.)).xyz;
@@ -189,8 +203,31 @@ void main() {
     //csm_FragColor.rgb =pow(csm_FragColor.rgb + 0.85, vec3(100.)) * 1000. * vec3(1., 0.7, 0.5);
     //csm_FragColor
 
-  csm_FragColor.rgb = (vec3(pow(albedo + 0.72, vec3(25.))) * 2.5  + vec3(0.005))* vec3(1., 0.85, 0.65);
+    #ifdef USE_TANGENT
+    mat3 tbn2 = mat3( normalize( vTangent ), normalize( vBitangent ), normal );
+#else
+    mat3 tbn2 = getTangentFrame( - vViewPosition, normalize( vNormal ),
+        vUv
+    );
+#endif
 
+  #ifdef USE_ANISOTROPY
+        #ifdef USE_ANISOTROPYMAP
+            mat2 anisotropyMat = mat2( anisotropyVector.x, anisotropyVector.y, - anisotropyVector.y, anisotropyVector.x );
+            vec3 anisotropyPolar = texture2D( anisotropyMap, vAnisotropyMapUv ).rgb;
+            vec2 anisotropyV2 = anisotropyMat * normalize( 2.0 * anisotropyPolar.rg - vec2( 1.0 ) ) * anisotropyPolar.b;
+        #else
+            vec2 anisotropyV2 = anisotropyVector;
+        #endif
+        float alphaT = mix( pow2( 0.2 ), 1.0, pow2( 1. ) );
+        vec3 anisotropyT = tbn2[ 0 ] * anisotropyV2.x + tbn2[ 1 ] * anisotropyV2.y;
+        vec3 anisotropyB = tbn2[ 1 ] * anisotropyV2.x - tbn2[ 0 ] * anisotropyV2.y;
+  #endif
+
+  float s = clamp(StrandSpecular(vDirWs, anisotropyB, dirL, worldNormal, 128., 0.5), 0., 2.) * 1.;
+
+  albedo += vec3(s);
+  csm_FragColor.rgb = (vec3(pow(albedo , vec3(2.2))) * 1.  + vec3(0.005))* vec3(1., 0.75, 0.65);
   //csm_Emissive *= vec3(uGlobalIntensity);
   //csm_Emissive *= vec3(uTintColor);
 }

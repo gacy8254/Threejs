@@ -6,9 +6,10 @@ function addLights(scene, gui, enableHelper)
     scene.add(dirLight);
     dirLight.castShadow = true;
     dirLight.position.set(16, 4.9, -8.9);
-    dirLight.intensity = 40;
+    dirLight.intensity = 18;
     dirLight.target.position.set(0., 1, 1.5);
     dirLight.shadow.mapSize.set(1024, 1024);
+    dirLight.shadow.radius = 8.;
 
     const shadowCamera = dirLight.shadow.camera;
     shadowCamera.left = -10;
@@ -26,6 +27,11 @@ function addLights(scene, gui, enableHelper)
     pointLight.position.set(1.2, 2., -0.6);
     pointLight.intensity = 1;
 
+    const pointLightHair = new THREE.PointLight(0xffcfaf, 9.2, 0); // 颜色, 强度, 距离
+    scene.add(pointLightHair);
+    pointLightHair.position.set(0, 2., 0);
+    pointLightHair.intensity = 5.;
+
     if (enableHelper)
     {
         const dirHelper = new THREE.DirectionalLightHelper(dirLight, 3);
@@ -33,7 +39,7 @@ function addLights(scene, gui, enableHelper)
         // const helper = new THREE.CameraHelper( dirLight.shadow.camera );
         // scene.add( helper );
 
-        const pointHelper = new THREE.PointLightHelper(pointLight);
+        const pointHelper = new THREE.PointLightHelper(pointLight, 0.1);
         scene.add(pointHelper);
 
         	const params = {

@@ -63,16 +63,13 @@ let colorGradingPass;
 const enableCon = false;
 const gui = true;
 //const gui = new GUI;
-//gui.dom.style.zIndex = '1';
 // const stats = new Stats();
 // // 配置面板（可选）：
 // stats.showPanel(0); 
-
 // stats.dom.style.position = 'fixed';
 // stats.dom.style.left = '10px';   // 左侧偏移
 // stats.dom.style.bottom = '10px'; // 底部偏移（原默认是 top:0）
 // stats.dom.style.top = 'auto';    // 覆盖默认的 top:0
-
 // document.body.appendChild(stats.dom);
 
 // 1. 创建场景
